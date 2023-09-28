@@ -64,14 +64,11 @@ def create_table():
         }
         table.append(record)
     try:
-        # Запис у файл CSV
         with open('employees.csv', mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=table[0].keys())
 
-            # Запис заголовків
             writer.writeheader()
 
-            # Запис даних
             for record in table:
                 writer.writerow(record)
 
