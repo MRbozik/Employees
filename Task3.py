@@ -75,6 +75,15 @@ def plot_gender_pie(gender_counts):
     plt.show()
 
 
+def plot_age_bar(age_categories):
+    plt.figure(figsize=(10, 6))
+    plt.bar(age_categories.keys(), age_categories.values())
+    plt.xlabel("Вікова категорія")
+    plt.ylabel("Кількість співробітників")
+    plt.title("Розподіл за віком")
+    plt.xticks(rotation=45)
+    plt.show()
+
 
 def main():
     data = load_csv_data()
@@ -89,9 +98,13 @@ def main():
     for gender, count in gender_counts.items():
         print(f"{gender}: {count} співробітників")
 
+    print("Розподіл за віком:")
+    for category, count in age_categories.items():
+        print(f"{category}: {count} співробітників")
+
 
     plot_gender_pie(gender_counts)
-
+    plot_age_bar(age_categories)
 
 
 if __name__ == '__main__':
