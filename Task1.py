@@ -1,4 +1,5 @@
 import random
+import csv
 from faker import Faker
 from faker.providers import BaseProvider
 
@@ -35,7 +36,7 @@ class New_Provider(BaseProvider):
 def create_table():
     fake = Faker('uk_UA')
     fake.add_provider(New_Provider)
-    count = 10
+    count = 2000
     table = []
     for i in range(count):
         if i < count * 0.4:
@@ -62,7 +63,22 @@ def create_table():
             "Email": fake.email()
         }
         table.append(record)
-    print(table)
+    try:
+        # Запис у файл CSV
+        with open('employees.csv', mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.DictWriter(file, fieldnames=table[0].keys())
+
+            # Запис заголовків
+            writer.writeheader()
+
+            # Запис даних
+            for record in table:
+                writer.writerow(record)
+
+        print("Дані були успішно записані у файл 'employees.csv'.")
+
+    except Exception as e:
+        print(f"Сталася помилка при відкритті/записі файлу CSV: {e}")
 
 
 if __name__ == '__main__':
